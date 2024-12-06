@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "lib": ["esnext", "dom"],
+    "noEmit": true,
+    "isolatedModules": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": true,
+    "strict": true
+  }
+}
