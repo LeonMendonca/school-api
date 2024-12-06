@@ -1,16 +1,20 @@
-import sql from 'mysql2'
+import sql from 'mysql2/promise'
+import { loadEnvFile } from 'node:process'
+
+loadEnvFile('.env');
 
 async function connectSql() {
-  const connection = sql.createPool({
-    host: 'localhost',
-    user: 'leon',
-    database: 'leon'
-  });
-  console.log("connected!");
-  connection.on('connection', (conn)=> {
-    console.log(conn);
-  });
+  try {
+    await sql.createConnection({
+      host: process.env.HOST,
+      user: process.env.USER,
+      database: process.env.DB,
+      password: process.env.PASSWORD,
+    });
+    console.log("Connected!"); 
+  } catch (error) {
+    throw error;
+  } 
 }
-connectSql();
 
 export { connectSql };
