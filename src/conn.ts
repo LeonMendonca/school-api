@@ -1,11 +1,13 @@
 import sql from 'mysql2/promise'
-import { loadEnvFile } from 'node:process'
+import { loadEnvFile } from 'process'
 
 loadEnvFile('.env');
 
+let conn: sql.Connection;
+
 async function connectSql() {
   try {
-    await sql.createConnection({
+    conn = await sql.createConnection({
       host: process.env.HOST,
       user: process.env.USER,
       database: process.env.DB,
@@ -17,4 +19,4 @@ async function connectSql() {
   } 
 }
 
-export { connectSql };
+export { connectSql, conn };
