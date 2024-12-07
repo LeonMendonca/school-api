@@ -1,7 +1,8 @@
-import { loadEnvFile } from 'process'
+//import { loadEnvFile } from 'process'
 import pg from 'pg'
 import { createTable } from './query.ts';
 
+//Uncomment below if you have .env file
 //loadEnvFile('.env');
 
 let client: pg.Client;

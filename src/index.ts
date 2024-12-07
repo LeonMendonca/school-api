@@ -1,9 +1,10 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { loadEnvFile } from 'process'
+//import { loadEnvFile } from 'process'
 
 import { connectSql } from './conn.ts'
 import { router } from './routes.ts'
 
+//Uncomment below if you have .env file
 //loadEnvFile('.env');
 
 const port = process.env.PORT ? Number(process.env.PORT) : 2000;
