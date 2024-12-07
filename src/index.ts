@@ -4,7 +4,7 @@ import { loadEnvFile } from 'process'
 import { connectSql } from './conn.ts'
 import { router } from './routes.ts'
 
-loadEnvFile('.env');
+//loadEnvFile('.env');
 
 const port = process.env.PORT ? Number(process.env.PORT) : 2000;
 const app = express();

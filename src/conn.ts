@@ -1,7 +1,7 @@
 import sql from 'mysql2/promise'
 import { loadEnvFile } from 'process'
 
-loadEnvFile('.env');
+//loadEnvFile('.env');
 
 let conn: sql.Connection;
 
