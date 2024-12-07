@@ -2,7 +2,7 @@ import { loadEnvFile } from 'process'
 import pg from 'pg'
 import { createTable } from './query.ts';
 
-loadEnvFile('.env');
+//loadEnvFile('.env');
 
 let client: pg.Client;
 
