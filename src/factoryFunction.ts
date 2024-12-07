@@ -1,4 +1,5 @@
-import type { ISchool } from './types.ts';
+import type { Request } from 'express'
+import type { ISchool, IUserCoords } from './types.ts';
 import Joi from 'joi';
 
 const schoolBodySchema = Joi.object({
@@ -7,6 +8,11 @@ const schoolBodySchema = Joi.object({
   latitude: Joi.number().min(-90).max(90).required(),
   longitude: Joi.number().min(-180).max(180).required()
 });
+
+const userCoordSchema = Joi.object({
+  latitude: Joi.number().min(-90).max(90).required(),
+  longitude: Joi.number().min(-180).max(180).required()
+})
 
 async function factoryAddSchool(body: unknown) {
   try {
@@ -23,8 +29,24 @@ async function factoryAddSchool(body: unknown) {
     }
   } catch(error) {
     throw error;
+  }  
+}
+
+async function factoryListSchools(userCoord: Request) {
+  try {
+    let params = userCoord.params;
+    await userCoordSchema.validateAsync(params);
+    if(genericTG<IUserCoords>(params, ['latitude', 'longitude'])) {
+      return {
+        latitude: Number(params.latitude),
+        longitude: Number(params.longitude),
+      }
+    } else {
+      throw new Error("Not a valid params");
+    }
+  } catch (error) {
+    throw error;
   }
-  
 }
 
 //Generic typeguard
@@ -32,4 +54,4 @@ function genericTG<T extends object>(obj: unknown, keys: (keyof T)[]): obj is T 
   return obj !== null && typeof obj === 'object' && keys.every(key => key in obj);
 }
 
-export { factoryAddSchool };
+export { factoryAddSchool, factoryListSchools };

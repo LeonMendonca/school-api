@@ -5,4 +5,9 @@ interface ISchool {
   longitude: number;
 }
 
-export type { ISchool };
+interface IUserCoords {
+  latitude: number;
+  longitude: number;
+}
+
+export type { ISchool, IUserCoords };
