@@ -16,13 +16,14 @@
   "dependencies": {
     "express": "^4.21.2",
     "joi": "^17.13.3",
-    "mysql2": "^3.11.5"
+    "pg": "^8.13.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
     "@babel/preset-typescript": "^7.26.0",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.1",
+    "@types/pg": "^8.11.10",
     "nodemon": "^3.1.7",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"

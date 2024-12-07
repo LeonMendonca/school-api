@@ -1,22 +1,38 @@
-import sql from 'mysql2/promise'
 import { loadEnvFile } from 'process'
+import pg from 'pg'
+import { createTable } from './query.ts';
 
-//loadEnvFile('.env');
+loadEnvFile('.env');
 
-let conn: sql.Connection;
+let client: pg.Client;
 
 async function connectSql() {
   try {
-    conn = await sql.createConnection({
+    client = new pg.Client({
       host: process.env.HOST,
-      user: process.env.USER,
+      user: process.env.PGUSER,
       database: process.env.DB,
       password: process.env.PASSWORD,
+      port: Number(process.env.PGPORT),
+      ssl:{
+        rejectUnauthorized: false
+      }
     });
-    console.log("Connected!"); 
+    await client.connect().then(async ()=> {
+      try {
+        await createTable();
+        console.log("created table");
+      } catch (error) {
+        //catch the error and log the error, without crashing the server
+        if(error instanceof Error) {
+          console.error(error.message);  
+        }
+      }
+    });
+    console.log("Connected!");
   } catch (error) {
     throw error;
   } 
 }
 
-export { connectSql, conn };
+export { connectSql, client };
